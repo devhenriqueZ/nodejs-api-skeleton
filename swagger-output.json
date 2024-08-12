@@ -1,0 +1,377 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "NodeJS Microservice Skeleton",
+    "description": "This is a CRUD microservice for managing authors and books.",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "tags": [
+    {
+      "name": "Authors",
+      "description": "Operations related to authors"
+    },
+    {
+      "name": "Books",
+      "description": "Operations related to books"
+    }
+  ],
+  "paths": {
+    "/authors": {
+      "get": {
+        "tags": [
+          "Authors"
+        ],
+        "summary": "Retrieve all authors",
+        "description": "Fetch a list of all authors in the system.",
+        "responses": {
+          "200": {
+            "description": "A list of authors.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Author"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Authors"
+        ],
+        "summary": "Create a new author",
+        "description": "Add a new author to the system.",
+        "parameters": [
+          {
+            "name": "author",
+            "in": "body",
+            "description": "The author to create.",
+            "schema": {
+              "$ref": "#/definitions/Author"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The created author.",
+            "schema": {
+              "$ref": "#/definitions/Author"
+            }
+          },
+          "default": {
+            "description": "Unexpected error."
+          }
+        }
+      }
+    },
+    "/authors/{id}": {
+      "get": {
+        "tags": [
+          "Authors"
+        ],
+        "summary": "Retrieve a specific author",
+        "description": "Fetch details of an author by their ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the author to retrieve."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested author.",
+            "schema": {
+              "$ref": "#/definitions/Author"
+            }
+          },
+          "default": {
+            "description": "Unexpected error."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Authors"
+        ],
+        "summary": "Update a specific author",
+        "description": "Modify the details of an existing author.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the author to update."
+          },
+          {
+            "name": "author",
+            "in": "body",
+            "description": "The updated author data.",
+            "schema": {
+              "$ref": "#/definitions/Author"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The updated author.",
+            "schema": {
+              "$ref": "#/definitions/Author"
+            }
+          },
+          "default": {
+            "description": "Unexpected error."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Authors"
+        ],
+        "summary": "Delete a specific author",
+        "description": "Remove an author from the system by their ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the author to delete."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The author was successfully deleted."
+          },
+          "default": {
+            "description": "Unexpected error."
+          }
+        }
+      }
+    },
+    "/books": {
+      "get": {
+        "tags": [
+          "Books"
+        ],
+        "summary": "Retrieve all books",
+        "description": "Fetch a list of all books in the system.",
+        "responses": {
+          "200": {
+            "description": "A list of books.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Book"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Books"
+        ],
+        "summary": "Create a new book",
+        "description": "Add a new book to the system.",
+        "parameters": [
+          {
+            "name": "book",
+            "in": "body",
+            "description": "The book to create.",
+            "schema": {
+              "$ref": "#/definitions/Book"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The created book.",
+            "schema": {
+              "$ref": "#/definitions/Book"
+            }
+          },
+          "default": {
+            "description": "Unexpected error."
+          }
+        }
+      }
+    },
+    "/books/search": {
+      "get": {
+        "tags": [
+          "Books"
+        ],
+        "summary": "Search for books by author",
+        "description": "Fetch a list of books from a specific author.",
+        "parameters": [
+          {
+            "name": "author",
+            "in": "query",
+            "type": "string",
+            "description": "The author's name to search for."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of books matching the author.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Book"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error."
+          }
+        }
+      }
+    },
+    "/books/{id}": {
+      "get": {
+        "tags": [
+          "Books"
+        ],
+        "summary": "Retrieve a specific book",
+        "description": "Fetch details of a book by its ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the book to retrieve."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested book.",
+            "schema": {
+              "$ref": "#/definitions/Book"
+            }
+          },
+          "default": {
+            "description": "Unexpected error."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Books"
+        ],
+        "summary": "Update a specific book",
+        "description": "Modify the details of an existing book.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the book to update."
+          },
+          {
+            "name": "book",
+            "in": "body",
+            "description": "The updated book data.",
+            "schema": {
+              "$ref": "#/definitions/Book"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The updated book.",
+            "schema": {
+              "$ref": "#/definitions/Book"
+            }
+          },
+          "default": {
+            "description": "Unexpected error."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Books"
+        ],
+        "summary": "Delete a specific book",
+        "description": "Remove a book from the system by its ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the book to delete."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The book was successfully deleted."
+          },
+          "default": {
+            "description": "Unexpected error."
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Author": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the author."
+        },
+        "nationality": {
+          "type": "string",
+          "description": "Nationality of the author."
+        }
+      }
+    },
+    "Book": {
+      "type": "object",
+      "required": [
+        "title",
+        "author"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Title of the book."
+        },
+        "price": {
+          "type": "number",
+          "description": "Price of the book."
+        },
+        "pages": {
+          "type": "integer",
+          "description": "Number of pages in the book."
+        },
+        "author": {
+          "type": "string",
+          "description": "Author of the book."
+        }
+      }
+    }
+  }
+}

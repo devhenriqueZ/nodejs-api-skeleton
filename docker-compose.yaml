@@ -1,0 +1,34 @@
+services:
+  node:
+    image: nodejs_api_skeleton
+    container_name: nodejs_api_skeleton
+    restart: on-failure
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile
+    environment:
+      - RABBITMQ_URL=amqp://user:password@rabbitmq:5672
+    volumes:
+      - .:/usr/app
+    ports:
+      - 3000:3000
+    networks:
+      - nodejs_api_network
+    depends_on:
+      - rabbitmq
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=password
+    networks:
+      - nodejs_api_network
+
+networks:
+  nodejs_api_network:
+    driver: bridge
